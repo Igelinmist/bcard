@@ -32,15 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'number',
             [
                 'label' => 'Выпуск',
-                'value' => Yii::$app->formatter->asDate($model->issue),
+                'value' => Yii::$app->formatter->asDatetime($model->issue),
             ],
             [
                 'label' => 'Срок действия',
-                'value' => Yii::$app->formatter->asDate($model->expiration),
+                'value' => Yii::$app->formatter->asDatetime($model->expiration),
             ],
             [
                 'label' => 'Дата использования',
-                'value' => Yii::$app->formatter->asDate($model->activity),
+                'value' => Yii::$app->formatter->asDatetime($model->activity),
             ],
             [
                 'label' => 'Сумма',
