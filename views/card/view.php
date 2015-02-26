@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Профиль карты ') ?><i><?= Html::encode($model->series.'  '.$model->number) ?></i></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -28,14 +28,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'series',
-            'number',
-            'issue',
-            'expiration',
-            'activity',
-            'amount',
-            'status',
+            // 'series',
+            // 'number',
+            [
+                'label' => 'Выпуск',
+                'value' => Yii::$app->formatter->asDate($model->issue),
+            ],
+            [
+                'label' => 'Срок действия',
+                'value' => Yii::$app->formatter->asDate($model->expiration),
+            ],
+            [
+                'label' => 'Дата использования',
+                'value' => Yii::$app->formatter->asDate($model->activity),
+            ],
+            [
+                'label' => 'Сумма',
+                'value' => Yii::$app->formatter->asCurrency($model->getAmount()),
+            ],
+            [
+                'label' => 'Статус',
+                'value' => $model->getStatus(),
+            ],
         ],
     ]) ?>
 

@@ -48,13 +48,13 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'series' => 'Series',
-            'number' => 'Number',
-            'issue' => 'Issue',
-            'expiration' => 'Expiration',
-            'activity' => 'Activity',
-            'amount' => 'Amount',
-            'status' => 'Status',
+            'series' => 'Серия',
+            'number' => 'Номер',
+            'issue' => 'Выпуск',
+            'expiration' => 'Активна до...',
+            'activity' => 'Использовалась',
+            'amount' => 'Сумма',
+            'status' => 'Статус',
         ];
     }
 
@@ -64,5 +64,29 @@ class Card extends \yii\db\ActiveRecord
     public function getTransactions()
     {
         return $this->hasMany(Transaction::className(), ['card_id' => 'id']);
+    }
+
+    // Decorate Amount
+    public function getAmount()
+    {
+        return $this->amount / 100;
+    }
+
+    //Decorate Status
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case 0:
+                return 'Не активирована';
+
+            case 1:
+                return 'Активна';
+
+            case 2:
+                return 'Просрочена';
+
+            default:
+                return 'Неопределенный';
+        }
     }
 }
