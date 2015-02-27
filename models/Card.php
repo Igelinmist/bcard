@@ -89,4 +89,14 @@ class Card extends \yii\db\ActiveRecord
                 return 'Неопределенный';
         }
     }
+
+    //Test Generator
+
+    public static function generateCards($ser, $cnt)
+    {
+        for ($new_id = 0; $new_id < $cnt; $new_id++)
+        {
+            //action save new cards 
+        }
+    }
 }

@@ -5,6 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Card;
 use app\models\CardSearch;
+
+use app\models\GeneratorForm;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -101,6 +104,19 @@ class CardController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionGenerate()
+    {
+        $model = new GeneratorForm();
+        $searchModel = new CardSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if ($model->load(Yii::$app->request->post())) { 
+            Card::generateCards($model->serNo, $model->amount);
+            return $this->redirect(['index']);
+        }
+        else
+            return $this->render('generatorForm', ['model' => $model]);
     }
 
     /**
