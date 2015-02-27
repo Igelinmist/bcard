@@ -12,9 +12,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * CardController implements the CRUD actions for Card model.
- */
 class CardController extends Controller
 {
     public function behaviors()
@@ -29,10 +26,6 @@ class CardController extends Controller
         ];
     }
 
-    /**
-     * Lists all Card models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new CardSearch();
@@ -44,11 +37,6 @@ class CardController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Card model.
-     * @param string $id
-     * @return mixed
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -56,11 +44,6 @@ class CardController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Card model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new Card();
@@ -68,18 +51,24 @@ class CardController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return $this->render('create', ['model' => $model,]);
         }
     }
 
-    /**
-     * Updates an existing Card model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
+    public function actionCreateCards()
+    {
+        $model = new GeneratorForm();
+        $searchModel = new CardSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if ($model->load(Yii::$app->request->post())) { 
+            Card::generateCards($model->serNo, $model->amount, $model->termInMounth);
+            return $this->redirect(['index']);
+        }
+        else
+            return $this->render('create-cards', ['model' => $model]);
+    }
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -93,12 +82,6 @@ class CardController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Card model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -106,26 +89,6 @@ class CardController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionGenerate()
-    {
-        $model = new GeneratorForm();
-        $searchModel = new CardSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if ($model->load(Yii::$app->request->post())) { 
-            Card::generateCards($model->serNo, $model->amount);
-            return $this->redirect(['index']);
-        }
-        else
-            return $this->render('generatorForm', ['model' => $model]);
-    }
-
-    /**
-     * Finds the Card model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Card the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Card::findOne($id)) !== null) {

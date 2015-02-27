@@ -15,7 +15,6 @@ class GeneratorForm extends Model
     {
       return [
         [['serNo','amount','termInMounth'], 'required'],
-        [['amount','termMounth'], 'integerOnly'],
       ];
     }
 }

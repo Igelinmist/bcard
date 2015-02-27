@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 <div class="card-form">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['generate'],
+        'action' => ['create-cards'],
         'method' => 'post',
     ]); ?>
 
@@ -16,8 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'amount') ?>
 
+    <?= $form->field($model, 'termInMounth') ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Generate', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Генерировать', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

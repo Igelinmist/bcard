@@ -90,9 +90,9 @@ class Card extends \yii\db\ActiveRecord
         }
     }
 
-    //Test Generator
+    //Generator in test mode
 
-    public static function generateCards($ser, $cnt)
+    public static function generateCards($ser, $cnt, $term)
     {
         for ($new_id = 0; $new_id < $cnt; $new_id++)
         {

@@ -3,20 +3,15 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\CardSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Cards';
+$this->title = 'Карты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="card-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Card', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Генерировать новые карты', ['create-cards'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,13 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
             'series',
             'number',
             'issue',
             'expiration',
-            // 'activity',
-            // 'amount',
             'status',
 
             ['class' => 'yii\grid\ActionColumn'],
