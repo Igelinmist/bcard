@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Установки для генерации карт';
+$this->title = 'Генерация карт';
 $this->params['breadcrumbs'][] = ['label' => 'Карты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
