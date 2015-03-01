@@ -9,14 +9,12 @@ class GeneratorForm extends Model
     /* Input params for CardsGenerator */
     public $serNo;
     public $amount;
-    public $termInMounth;
+    public $termInMounth = 1;
 
     public function rules()
     {
-      return [
-        [['serNo','amount','termInMounth'], 'required'],
-        [['amount', 'termInMounth'], 'integer'],
-        [['series'], 'string', 'max' => 4]
-      ];
+      return array(
+        array(['serNo','amount','termInMounth'],'required'),
+        );
     }
 }

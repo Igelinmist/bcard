@@ -97,7 +97,7 @@ class Card extends \yii\db\ActiveRecord
         for ($new_id = 0; $new_id < $cnt; $new_id++)
         {
             //action save new cards 
-            $date = date_create()->format("Y-m-d H:i:s");;
+            $date = date("Y-m-d H:i:s");
             $card = new Card([
                 'series' => $ser, 
                 'number' => $new_id,
