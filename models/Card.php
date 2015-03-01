@@ -90,14 +90,24 @@ class Card extends \yii\db\ActiveRecord
         }
     }
 
+
+
     //Generator in test mode
 
     public static function generateCards($ser, $cnt, $term)
     {
-        for ($new_id = 0; $new_id < $cnt; $new_id++)
+        // Определение последнего номера карты для данной серии
+
+        $lastCard = Card::find()
+            ->where('series=:serNo', array(':serNo' => $ser))
+            ->orderBy('id DESC')
+            ->one();
+        $n = $lastCard->number;
+        
+        $date = date("Y-m-d H:i:s");
+        for ($new_id = $n + 1; $new_id < $n + 1 + $cnt; $new_id++)
         {
             //action save new cards 
-            $date = date("Y-m-d H:i:s");
             $card = new Card([
                 'series' => $ser, 
                 'number' => $new_id,
