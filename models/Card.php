@@ -102,7 +102,7 @@ class Card extends \yii\db\ActiveRecord
             ->where('series=:serNo', array(':serNo' => $ser))
             ->orderBy('id DESC')
             ->one();
-        $n = $lastCard->number;
+        $lastCard ? $n = $lastCard->number : $n = 0;
         
         $date = date("Y-m-d H:i:s");
         for ($new_id = $n + 1; $new_id < $n + 1 + $cnt; $new_id++)
