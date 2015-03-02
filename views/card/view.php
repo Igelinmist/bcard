@@ -52,5 +52,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
-
+    <h2>Использование карты</h2>
+    <table>
+        <tr>
+            <th>Дата, время</th>
+            <th>Сумма</th>
+        </tr>
+        <?php
+        foreach($model->transactions as $transaction) {
+        ?>
+        <tr>
+            <td><?= $transaction->dttm ?></td>
+            <td><?= $transaction->sum ?></td>
+        </tr>
+        <?php
+        }
+        ?>
+    </table>
 </div>

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%card}}".
@@ -18,8 +19,9 @@ use Yii;
  *
  * @property Transaction[] $transactions
  */
-class Card extends \yii\db\ActiveRecord
+class Card extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
